@@ -1,0 +1,141 @@
+import numpy as np
+import pandas as pd
+
+df=pd.read_csv("/content/Movie_classification.csv")
+df
+
+df.tail()
+
+df.head()
+
+
+df.size
+
+df.shape
+
+df.isna().sum()
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df.corr()
+
+sns.heatmap(df.corr())
+
+df['Genre'].value_counts()
+
+sns.countplot(x='Genre',data=df)
+
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+
+
+
+
+df
+
+df=df.drop(['Genre','Avg_age_actors','Marketing expense','Multiplex coverage','3D_available','Twitter_hastags','Trailer_views'],axis=1)
+df
+
+df.isna().sum()
+
+df.dropna(subset=['Time_taken'], inplace=True)
+
+
+df.isna().sum()
+
+df.dtypes
+
+x=df.drop(['Start_Tech_Oscar'],axis=1)
+x
+
+y=df.Start_Tech_Oscar
+y
+
+from sklearn.model_selection import train_test_split
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.30)
+
+x_train
+
+x_test
+
+y_train
+
+y_test
+
+
+from sklearn.neighbors import KNeighborsClassifier
+
+knn_classifier = KNeighborsClassifier()
+
+knn_classifier.fit(x_train, y_train)
+
+y_pred = knn_classifier.predict(x_test)
+
+from sklearn.metrics import accuracy_score
+
+accuracy = accuracy_score(y_test, y_pred)
+
+accuracy
+
+from sklearn.svm import SVC
+svm_classifier = SVC()
+
+svm_classifier.fit(x_train, y_train)
+
+y_pred1= svm_classifier.predict(x_test)
+
+accuracy1= accuracy_score(y_test, y_pred)
+
+accuracy1
+
+from sklearn.naive_bayes import MultinomialNB
+
+naive_bayes_classifier = MultinomialNB()
+
+naive_bayes_classifier.fit(x_train, y_train)
+
+y_pred4 = naive_bayes_classifier.predict(x_test)
+accuracy2 = accuracy_score(y_test, y_pred)
+
+accuracy2
+
+from sklearn.tree import DecisionTreeClassifier
+
+decision_tree_classifier = DecisionTreeClassifier(random_state=42)
+
+decision_tree_classifier.fit(x_train, y_train)
+
+y_pred3 = decision_tree_classifier.predict(x_test)
+
+accuracy = accuracy_score(y_test, y_pred3)
+
+accuracy
+
+from sklearn.linear_model import LogisticRegression
+
+from sklearn.preprocessing import StandardScaler
+
+logistic_regression_model = LogisticRegression()
+
+logistic_regression_model.fit(x_train, y_train)
+
+y_pred5= logistic_regression_model.predict(x_test)
+
+accuracy5= accuracy_score(y_test, y_pred)
+
+accuracy5
+
+from sklearn.ensemble import RandomForestClassifier
+
+rf_classifier = RandomForestClassifier()
+
+rf_classifier.fit(x_train, y_train)
+
+y_pred = rf_classifier.predict(x_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+
+
+accuracy
